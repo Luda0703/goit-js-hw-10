@@ -5,7 +5,7 @@ import debounce from 'lodash.debounce';
 
 const DEBOUNCE_DELAY = 300;
 const countryList = document.querySelector('.country-list');
-const cauntryInfo = document.querySelector('.country-info')
+const countryInfo = document.querySelector('.country-info')
 const inputText = document.querySelector('input#search-box');
 
 inputText.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
@@ -16,13 +16,13 @@ function onSearch(e) {
     const inputValue = e.target.value.trim();
     if (!inputValue) {
         resetMarkup(countryList);
-        resetMarkup(cauntryInfo);
+        resetMarkup(countryInfo);
         return;
       }
 
 
     fetchCountries(inputValue)
-    .then((data) => {
+    .then(data => {
     //console.log("data", data);
     if (data.length > 10) {
         Notiflix.Notify.info(
@@ -30,11 +30,11 @@ function onSearch(e) {
         );
         return;
         }
-     insertContent(data);
+        insertContent(data);
     })
-    .catch((error) => {
+    .catch(() => {
         resetMarkup(countryList);
-        resetMarkup(cauntryInfo);
+        resetMarkup(countryInfo);
         Notiflix.Notify.failure('Oops, there is no country with that name')
     })
 
@@ -44,8 +44,8 @@ function resetMarkup(el) {
     el.innerHTML = '';
   }
 
-  function countryListItem(item) {
-    return item.map(
+  function countryListItem(country) {
+    return country.map(
         ({ name, flags }) =>
           `<li class="link">
           <img src="${flags.png}" alt="${name.official}" width="60" height="40"> 
@@ -55,8 +55,8 @@ function resetMarkup(el) {
       .join('');
   };
 
-function countryInfoItem(item) {
-    return item.map(
+function countryInfoItem(country) {
+    return country.map(
         ({ name, capital, population, flags, languages }) =>
           ` <div class="cauntry-items">  
           <img src="${flags.png}" alt="${name.official}" width="200" height="100">
@@ -70,10 +70,10 @@ function countryInfoItem(item) {
 function insertContent(country) {
     if (country.length === 1) {
         resetMarkup(countryListItem);
-        cauntryInfo.innerHTML = countryInfoItem(country);
+        countryInfo.innerHTML = countryInfoItem(country);
     } else {
         resetMarkup(countryInfoItem);
-      countryList.innerHTML = countryListItem(country);
+        countryList.innerHTML = countryListItem(country);
     }
   };
 
