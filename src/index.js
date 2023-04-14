@@ -70,10 +70,10 @@ function countryInfoItem(country) {
 function insertContent(country) {
     if (country.length === 1) {
         resetMarkup(countryListItem);
-        countryInfo.innerHTML = countryInfoItem(country);
+        countryList.innerHTML = countryInfoItem(country);
     } else {
         resetMarkup(countryInfoItem);
-        countryList.innerHTML = countryListItem(country);
+        countryInfo.innerHTML = countryListItem(country);
     }
   };
 
