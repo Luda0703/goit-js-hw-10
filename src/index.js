@@ -69,11 +69,11 @@ function countryInfoItem(country) {
 
 function insertContent(country) {
     if (country.length === 1) {
-        resetMarkup(countryListItem);
-        countryList.innerHTML = countryInfoItem(country);
+        resetMarkup(countryList);
+        countryInfo.innerHTML = countryInfoItem(country);
     } else {
-        resetMarkup(countryInfoItem);
-        countryInfo.innerHTML = countryListItem(country);
+        resetMarkup(countryInfo);
+        countryList.innerHTML = countryListItem(country);
     }
   };
 
